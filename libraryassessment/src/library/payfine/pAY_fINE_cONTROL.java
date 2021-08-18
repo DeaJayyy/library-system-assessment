@@ -54,7 +54,7 @@ public class pAY_fINE_cONTROL {
 		if (!StAtE.equals(cOnTrOl_sTaTe.PAYING)) 
 			throw new RuntimeException("PayFineControl: cannot call payFine except in PAYING state");
 			
-		double ChAnGe = MeMbEr.payFine(AmOuNt);
+		double ChAnGe = MeMbEr.PaY_FiNe(AmOuNt);
 		if (ChAnGe > 0) 
 			Ui.DiSplAY(String.format("Change: $%.2f", ChAnGe));
 		
