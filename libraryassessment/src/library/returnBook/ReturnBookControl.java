@@ -1,6 +1,6 @@
 package library.returnBook;
 import library.entities.Book;
-import library.entities.library;
+import library.entities.Library;
 import library.entities.Loan;
 
 public class ReturnBookControl {
@@ -9,7 +9,7 @@ public class ReturnBookControl {
 	private enum control_state { INITIALISED, READY, INSPECTING };
 	private control_state state;
 	
-	private library library;
+	private Library library;
 	private Loan current_loan;
 	
 
@@ -19,7 +19,7 @@ public class ReturnBookControl {
 	}
 	
 	
-	public void sEt_UI(ReturnBookUI UI) {
+	public void set_UI(ReturnBookUI UI) {
 		if (!state.equals(control_state.INITIALISED)) 
 			throw new RuntimeException("ReturnBookControl: cannot call setUI except in INITIALISED state");
 		
@@ -33,26 +33,26 @@ public class ReturnBookControl {
 		if (!state.equals(control_state.READY)) 
 			throw new RuntimeException("ReturnBookControl: cannot call bookScanned except in READY state");
 		
-		Book current_book = library.get_book(book_ID);
+		Book current_book = library.GET_BOOK(book_ID);
 		
 		if (current_book == null) {
 			UI.display("Invalid Book Id");
 			return;
 		}
-		if (!current_book.is_on_loan()) {
+		if (!current_book.IS_ON_LOAN()) {
 			UI.display("Book has not been borrowed");
 			return;
 		}		
-		current_loan = library.get_loan_by_bookID(book_ID);	
+		current_loan = library.GET_LOAN_BY_BOOKID(book_ID);	
 		double over_due_fine = 0.0;
-		if (current_loan.is_over_due()) 
-			over_due_fine = library.calculate_over_due_fine(current_loan);
+		if (current_loan.IS_OVER_DUE()) 
+			over_due_fine = library.CALCULATE_OVER_DUE_FINE(current_loan);
 		
 		UI.display("Inspecting");
 		UI.display(current_book.toString());
 		UI.display(current_loan.toString());
 		
-		if (current_loan.is_over_due()) 
+		if (current_loan.IS_OVER_DUE()) 
 			UI.display(String.format("\nOverdue fine : $%.2f", over_due_fine));
 		
 		UI.set_state(ReturnBookUI.UI_state.INSPECTING);
@@ -68,11 +68,11 @@ public class ReturnBookControl {
 	}
 
 
-	public void discharge_loan(boolean is_damaged) {
+	public void DISCHARGE_LOAN(boolean is_damaged) {
 		if (!state.equals(control_state.INSPECTING)) 
 			throw new RuntimeException("ReturnBookControl: cannot call dischargeLoan except in INSPECTING state");
 		
-		library.discharge_loan(current_loan, is_damaged);
+		library.DISCHARGE_LOAN(current_loan, is_damaged);
 		current_loan = null;
 		UI.set_state(ReturnBookUI.UI_state.READY);
 		state = control_state.READY;				

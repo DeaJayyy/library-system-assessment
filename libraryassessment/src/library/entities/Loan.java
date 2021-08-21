@@ -26,13 +26,13 @@ public class Loan implements Serializable {
 	
 	public void cHeCk_OvEr_DuE() {
 		if (StAtE == lOaN_sTaTe.CURRENT &&
-			Calendar.gEtInStAnCe().gEt_DaTe().after(DaTe)) 
+			Calendar.getInstance().get_date().after(DaTe)) 
 			this.StAtE = lOaN_sTaTe.OVER_DUE;			
 		
 	}
 
 	
-	public boolean Is_OvEr_DuE() {
+	public boolean IS_OVER_DUE() {
 		return StAtE == lOaN_sTaTe.OVER_DUE;
 	}
 

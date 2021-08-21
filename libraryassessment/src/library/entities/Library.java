@@ -49,14 +49,14 @@ public class Library implements Serializable {
 	}
 
 	
-	public static synchronized Library GeTiNsTaNcE() {		
+	public static synchronized Library getInstance() {		
 		if (SeLf == null) {
 			Path PATH = Paths.get(lIbRaRyFiLe);			
 			if (Files.exists(PATH)) {	
 				try (ObjectInputStream LiBrArY_FiLe = new ObjectInputStream(new FileInputStream(lIbRaRyFiLe));) {
 			    
 					SeLf = (Library) LiBrArY_FiLe.readObject();
-					Calendar.gEtInStAnCe().SeT_DaTe(SeLf.lOaN_DaTe);
+					Calendar.getInstance().SeT_DaTe(SeLf.lOaN_DaTe);
 					LiBrArY_FiLe.close();
 				}
 				catch (Exception e) {
@@ -69,9 +69,9 @@ public class Library implements Serializable {
 	}
 
 	
-	public static synchronized void SaVe() {
+	public static synchronized void save() {
 		if (SeLf != null) {
-			SeLf.lOaN_DaTe = Calendar.gEtInStAnCe().gEt_DaTe();
+			SeLf.lOaN_DaTe = Calendar.getInstance().get_date();
 			try (ObjectOutputStream LiBrArY_fIlE = new ObjectOutputStream(new FileOutputStream(lIbRaRyFiLe));) {
 				LiBrArY_fIlE.writeObject(SeLf);
 				LiBrArY_fIlE.flush();
@@ -109,29 +109,29 @@ public class Library implements Serializable {
 	}
 
 	
-	public List<Member> lIsT_MeMbErS() {		
+	public List<Member> list_members() {		
 		return new ArrayList<Member>(MeMbErS.values()); 
 	}
 
 
-	public List<Book> lIsT_BoOkS() {		
+	public List<Book> LIST_BOOKS() {		
 		return new ArrayList<Book>(CaTaLoG.values()); 
 	}
 
 
-	public List<Loan> lISt_CuRrEnT_LoAnS() {
+	public List<Loan> list_current_loans() {
 		return new ArrayList<Loan>(CuRrEnT_LoAnS.values());
 	}
 
 
-	public Member aDd_MeMbEr(String lastName, String firstName, String email, int phoneNo) {		
+	public Member ADD_MEMBER(String lastName, String firstName, String email, int phoneNo) {		
 		Member member = new Member(lastName, firstName, email, phoneNo, gEt_NeXt_MeMbEr_Id());
 		MeMbErS.put(member.GeT_ID(), member);		
 		return member;
 	}
 
 	
-	public Book aDd_BoOk(String a, String t, String c) {		
+	public Book ADD_BOOK(String a, String t, String c) {		
 		Book b = new Book(a, t, c, gEt_NeXt_BoOk_Id());
 		CaTaLoG.put(b.gEtId(), b);		
 		return b;
@@ -145,7 +145,7 @@ public class Library implements Serializable {
 	}
 
 	
-	public Book gEt_BoOk(int bookId) {
+	public Book GET_BOOK(int bookId) {
 		if (CaTaLoG.containsKey(bookId)) 
 			return CaTaLoG.get(bookId);		
 		return null;
@@ -165,7 +165,7 @@ public class Library implements Serializable {
 			return false;
 				
 		for (Loan loan : member.GeT_LoAnS()) 
-			if (loan.Is_OvEr_DuE()) 
+			if (loan.IS_OVER_DUE()) 
 				return false;
 			
 		return true;
@@ -178,7 +178,7 @@ public class Library implements Serializable {
 
 	
 	public Loan iSsUe_LoAn(Book book, Member member) {
-		Date dueDate = Calendar.gEtInStAnCe().gEt_DuE_DaTe(loanPeriod);
+		Date dueDate = Calendar.getInstance().gEt_DuE_DaTe(loanPeriod);
 		Loan loan = new Loan(gEt_NeXt_LoAn_Id(), book, member, dueDate);
 		member.TaKe_OuT_LoAn(loan);
 		book.BoRrOw();
@@ -188,7 +188,7 @@ public class Library implements Serializable {
 	}
 	
 	
-	public Loan GeT_LoAn_By_BoOkId(int bookId) {
+	public Loan GET_LOAN_BY_BOOKID(int bookId) {
 		if (CuRrEnT_LoAnS.containsKey(bookId)) 
 			return CuRrEnT_LoAnS.get(bookId);
 		
@@ -196,9 +196,9 @@ public class Library implements Serializable {
 	}
 
 	
-	public double CaLcUlAtE_OvEr_DuE_FiNe(Loan LoAn) {
-		if (LoAn.Is_OvEr_DuE()) {
-			long DaYs_OvEr_DuE = Calendar.gEtInStAnCe().GeT_DaYs_DiFfErEnCe(LoAn.GeT_DuE_DaTe());
+	public double CALCULATE_OVER_DUE_FINE(Loan LoAn) {
+		if (LoAn.IS_OVER_DUE()) {
+			long DaYs_OvEr_DuE = Calendar.getInstance().GeT_DaYs_DiFfErEnCe(LoAn.GeT_DuE_DaTe());
 			double fInE = DaYs_OvEr_DuE * FiNe_PeR_DaY;
 			return fInE;
 		}
@@ -206,11 +206,11 @@ public class Library implements Serializable {
 	}
 
 
-	public void DiScHaRgE_LoAn(Loan cUrReNt_LoAn, boolean iS_dAmAgEd) {
+	public void DISCHARGE_LOAN(Loan cUrReNt_LoAn, boolean iS_dAmAgEd) {
 		Member mEmBeR = cUrReNt_LoAn.GeT_MeMbEr();
 		Book bOoK  = cUrReNt_LoAn.GeT_BoOk();
 		
-		double oVeR_DuE_FiNe = CaLcUlAtE_OvEr_DuE_FiNe(cUrReNt_LoAn);
+		double oVeR_DuE_FiNe = CALCULATE_OVER_DUE_FINE(cUrReNt_LoAn);
 		mEmBeR.AdD_FiNe(oVeR_DuE_FiNe);	
 		
 		mEmBeR.dIsChArGeLoAn(cUrReNt_LoAn);
@@ -224,7 +224,7 @@ public class Library implements Serializable {
 	}
 
 
-	public void cHeCk_CuRrEnT_LoAnS() {
+	public void CHECK_CURRENT_LOANS() {
 		for (Loan lOaN : CuRrEnT_LoAnS.values()) 
 			lOaN.cHeCk_OvEr_DuE();
 				

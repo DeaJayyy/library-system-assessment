@@ -6,12 +6,12 @@ public class FixBookUI {
 
 	public static enum uI_sTaTe { INITIALISED, READY, FIXING, COMPLETED };
 
-	private fIX_bOOK_cONTROL CoNtRoL;
+	private fix_book_control CoNtRoL;
 	private Scanner InPuT;
 	private uI_sTaTe StAtE;
 
 	
-	public FixBookUI(fIX_bOOK_cONTROL CoNtRoL) {
+	public FixBookUI(fix_book_control CoNtRoL) {
 		this.CoNtRoL = CoNtRoL;
 		InPuT = new Scanner(System.in);
 		StAtE = uI_sTaTe.INITIALISED;
@@ -24,7 +24,7 @@ public class FixBookUI {
 	}
 
 	
-	public void RuN() {
+	public void run() {
 		OuTpUt("Fix Book Use Case UI\n");
 		
 		while (true) {

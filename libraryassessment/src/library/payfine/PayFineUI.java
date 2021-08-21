@@ -7,12 +7,12 @@ public class PayFineUI {
 
 	public static enum uI_sTaTe { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
 
-	private pAY_fINE_cONTROL CoNtRoL;
+	private pay_fine_control CoNtRoL;
 	private Scanner input;
 	private uI_sTaTe StAtE;
 
 	
-	public PayFineUI(pAY_fINE_cONTROL control) {
+	public PayFineUI(pay_fine_control control) {
 		this.CoNtRoL = control;
 		input = new Scanner(System.in);
 		StAtE = uI_sTaTe.INITIALISED;
@@ -25,7 +25,7 @@ public class PayFineUI {
 	}
 
 
-	public void RuN() {
+	public void run() {
 		output("Pay Fine Use Case UI\n");
 		
 		while (true) {

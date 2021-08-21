@@ -2,19 +2,20 @@ package library;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
-import library.borrowBook.BorrowBookUI;
-import library.borrowBook.BORROW_BOOK_CONTROL;
+import library.borrowbook.BorrowBookUI;
+import library.borrowbook.borrow_book_control;
 import library.entities.Book;
 import library.entities.Calendar;
 import library.entities.Library;
 import library.entities.Loan;
 import library.entities.Member;
-import library.fixBook.FixBookUI;
-import library.fixBook.FIX_Book_CONTROL;
+import library.fixbook.FixBookUI;
+import library.fixbook.fix_book_control;
 import library.payfine.PayFineUI;
 import library.payfine.pay_fine_control;
 import library.returnBook.ReturnBookUI;
-import library.returnBook.ReturnBookControl;
+import library.returnBook.ReturnBookControl
+        ;
 
 
 public class Main {
@@ -59,11 +60,11 @@ public class Main {
 			CAL = Calendar.getInstance();
 			SDF = new SimpleDateFormat("dd/MM/yyyy");
 	
-			for (Member m : LIB.LIST_MemberS()) {
+			for (Member m : LIB.list_members()) {
 				output(m);
 			}
 			output(" ");
-			for (Book b : LIB.LIST_BookS()) {
+			for (Book b : LIB.LIST_BOOKS()) {
 				output(b);
 			}
 						
@@ -83,7 +84,7 @@ public class Main {
 					break;
 					
 				case "LM": 
-					LIST_MemberS();
+					list_members();
 					break;
 					
 				case "B": 
@@ -91,7 +92,7 @@ public class Main {
 					break;
 					
 				case "LB": 
-					LIST_BookS();
+					LIST_BOOKS();
 					break;
 					
 				case "FB": 
@@ -107,7 +108,7 @@ public class Main {
 					break;
 					
 				case "LL": 
-					LIST_CURRENT_LOANS();
+					list_current_loans();
 					break;
 					
 				case "P": 
@@ -127,7 +128,7 @@ public class Main {
 					break;
 				}
 				
-				Library.Save();
+				Library.save();
 			}			
 		} catch (RuntimeException e) {
 			output(e);
@@ -137,31 +138,31 @@ public class Main {
 
 	
 	private static void PAY_FINES() {
-		new PayFineUI(new pay_fine_control()).RUN();		
+		new PayFineUI(new pay_fine_control()).run();		
 	}
 
 
-	private static void LIST_CURRENT_LOANS() {
+	private static void list_current_loans() {
 		output("");
-		for (Loan loan : LIB.LIST_CURRENT_LOANS()) {
+		for (Loan loan : LIB.list_current_loans()) {
 			output(loan + "\n");
 		}		
 	}
 
 
 
-	private static void LIST_BookS() {
+	private static void LIST_BOOKS() {
 		output("");
-		for (Book Book : LIB.LIST_BookS()) {
+		for (Book Book : LIB.LIST_BOOKS()) {
 			output(Book + "\n");
 		}		
 	}
 
 
 
-	private static void LIST_MemberS() {
+	private static void list_members() {
 		output("");
-		for (Member Member : LIB.LIST_MemberS()) {
+		for (Member Member : LIB.list_members()) {
 			output(Member + "\n");
 		}		
 	}
@@ -169,17 +170,17 @@ public class Main {
 
 
 	private static void BORROW_BOOK() {
-		new BorrowBookUI(new BORROW_BOOK_CONTROL()).RUN();		
+		new BorrowBookUI(new borrow_book_control()).run();		
 	}
 
 
 	private static void RETURN_BOOK() {
-		new ReturnBookUI(new ReturnBookControlL()).RUN();		
+		new ReturnBookUI(new ReturnBookControl()).run();		
 	}
 
 
 	private static void FIX_BOOKS() {
-		new FixBookUI(new FIX_Book_CONTROL()).RUN();		
+		new FixBookUI(new fix_book_control()).run();		
 	}
 
 

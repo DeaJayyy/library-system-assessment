@@ -6,12 +6,12 @@ public class BorrowBookUI {
 	
 	public static enum uI_STaTe { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
 
-	private bORROW_bOOK_cONTROL CoNtRoL;
+	private borrow_book_control CoNtRoL;
 	private Scanner InPuT;
 	private uI_STaTe StaTe;
 
 	
-	public BorrowBookUI(bORROW_bOOK_cONTROL control) {
+	public BorrowBookUI(borrow_book_control control) {
 		this.CoNtRoL = control;
 		InPuT = new Scanner(System.in);
 		StaTe = uI_STaTe.INITIALISED;
@@ -35,7 +35,7 @@ public class BorrowBookUI {
 	}
 
 	
-	public void RuN() {
+	public void run() {
 		OuTpUt("Borrow Book Use Case UI\n");
 		
 		while (true) {

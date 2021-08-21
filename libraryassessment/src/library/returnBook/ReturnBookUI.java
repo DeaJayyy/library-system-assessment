@@ -4,17 +4,17 @@ import java.util.Scanner;
 
 public class ReturnBookUI {
 
-	public static enum ui_state { INITIALISED, READY, INSPECTING, COMPLETED };
+	public static enum UI_state { INITIALISED, READY, INSPECTING, COMPLETED };
 
-	private return_book_control control;
+	private ReturnBookControl control;
 	private Scanner input;
-	private ui_state state;
+	private UI_state state;
 
 	
-	public ReturnBookUI(return_book_control control) {
+	public ReturnBookUI(ReturnBookControl control) {
 		this.control = control;
 		input = new Scanner(System.in);
-		state = ui_state.INITIALISED;
+		state = UI_state.INITIALISED;
 		control.set_UI(this);
 	}
 
@@ -51,7 +51,7 @@ public class ReturnBookUI {
 				if (ans.toUpperCase().equals("Y")) 					
 					is_damaged = true;
 				
-				control.discharge_loan(is_damaged);
+				control.DISCHARGE_LOAN(is_damaged);
 			
 			case COMPLETED:
 				output("Return processing complete");
@@ -80,7 +80,7 @@ public class ReturnBookUI {
 		output(object);
 	}
 	
-	public void set_state(ui_state state) {
+	public void set_state(UI_state state) {
 		this.state = state;
 	}
 
