@@ -43,10 +43,10 @@ public class ReturnBookControl {
 			UI.display("Book has not been borrowed");
 			return;
 		}		
-		currentLoan = library.GET_LOAN_BY_BOOKID(book_ID);	
+		currentLoan = library.getLoanByBookId(book_ID);	
 		double over_due_fine = 0.0;
 		if (currentLoan.isOverDue()) 
-			over_due_fine = library.CALCULATE_OVER_DUE_FINE(currentLoan);
+			over_due_fine = library.calculateOverdueFine(currentLoan);
 		
 		UI.display("Inspecting");
 		UI.display(currentBook.toString());
@@ -72,7 +72,7 @@ public class ReturnBookControl {
 		if (!state.equals(controlState.INSPECTING)) 
 			throw new RuntimeException("ReturnBookControl: cannot call dischargeLoan except in INSPECTING state");
 		
-		library.discharge_loan(currentLoan, is_damaged);
+		library.dischageLoan(currentLoan, is_damaged);
 		currentLoan = null;
 		UI.setState(ReturnBookUI.UI_state.READY);
 		state = controlState.READY;				
