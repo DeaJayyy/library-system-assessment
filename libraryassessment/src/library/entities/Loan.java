@@ -53,7 +53,7 @@ public class Loan implements Serializable {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Loan:  ").append(loanId).append("\n")
 		  .append("  Borrower ").append(member.getId()).append(" : ")
-		  .append(member.GET_LAST_NAME()).append(", ").append(member.GET_FIRST_NAME()).append("\n")
+		  .append(member.getLastName()).append(", ").append(member.getFirstName()).append("\n")
 		  .append("  Book ").append(book.getId()).append(" : " )
 		  .append(book.getTitle()).append("\n")
 		  .append("  DueDate: ").append(sdf.format(date)).append("\n")
@@ -77,3 +77,4 @@ public class Loan implements Serializable {
 	}
 
 }
+
