@@ -10,9 +10,9 @@ import library.entities.Library;
 import library.entities.Loan;
 import library.entities.Member;
 import library.fixbook.FixBookUI;
-import library.fixbook.fIX_bOOK_cONTROL;
+import library.fixbook.FixBookControl;
 import library.payfine.PayFineUI;
-import library.payfine.pAY_fINE_cONTROL;
+import library.payfine.PayFineControl;
 import library.returnBook.ReturnBookUI;
 import library.returnBook.rETURN_bOOK_cONTROL;
 
@@ -56,7 +56,7 @@ public class Main {
 		try {			
 			IN = new Scanner(System.in);
 			LIB = Library.getInstance();
-			CAL = Calendar.gEtInStAnCe();
+			CAL = Calendar.getInstance();
 			SDF = new SimpleDateFormat("dd/MM/yyyy");
 	
 			for (Member m : LIB.listMembers()) {
@@ -73,7 +73,7 @@ public class Main {
 			
 			while (!e) {
 				
-				output("\n" + SDF.format(CAL.gEt_DaTe()));
+				output("\n" + SDF.format(CAL.getDate()));
 				String c = input(MENU);
 				
 				switch (c.toUpperCase()) {
@@ -137,7 +137,7 @@ public class Main {
 
 	
 	private static void PAY_FINES() {
-		new PayFineUI(new pAY_fINE_cONTROL()).RuN();		
+		new PayFineUI(new PayFineControl()).run();		
 	}
 
 
@@ -179,7 +179,7 @@ public class Main {
 
 
 	private static void FIX_BOOKS() {
-		new FixBookUI(new fIX_bOOK_cONTROL()).RuN();		
+		new FixBookUI(new FixBookControl()).run();		
 	}
 
 
@@ -188,7 +188,7 @@ public class Main {
 			int days = Integer.valueOf(input("Enter number of days: ")).intValue();
 			CAL.incrementDate(days);
 			LIB.checkCurrentLoans();
-			output(SDF.format(CAL.gEt_DaTe()));
+			output(SDF.format(CAL.getDate()));
 			
 		} catch (NumberFormatException e) {
 			 output("\nInvalid number of days\n");
