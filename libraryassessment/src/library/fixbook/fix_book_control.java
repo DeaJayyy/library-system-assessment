@@ -12,7 +12,7 @@ public class fix_book_control {
 	private Book CuRrEnT_BoOk;
 
 
-	public fix_book_control() {
+	public fIX_bOOK_cONTROL() {
 		this.LiBrArY = Library.getInstance();
 		StAtE = CoNtRoL_StAtE.INITIALISED;
 	}
@@ -53,7 +53,7 @@ public class fix_book_control {
 			throw new RuntimeException("FixBookControl: cannot call fixBook except in FIXING state");
 			
 		if (mUsT_FiX) 
-			LiBrArY.RePaIr_BoOk(CuRrEnT_BoOk);
+			LiBrArY.repairBook(CuRrEnT_BoOk);
 		
 		CuRrEnT_BoOk = null;
 		Ui.SeT_StAtE(FixBookUI.uI_sTaTe.READY);
