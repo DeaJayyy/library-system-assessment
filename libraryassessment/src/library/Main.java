@@ -14,7 +14,8 @@ import library.fixbook.FixBookControl;
 import library.payfine.PayFineUI;
 import library.payfine.PayFineControl;
 import library.returnBook.ReturnBookUI;
-import library.returnBook.rETURN_bOOK_cONTROL;
+import library.returnBook.ReturnBookControl
+        ;
 
 
 public class Main {
@@ -26,16 +27,16 @@ public class Main {
 	private static SimpleDateFormat SDF;
 	
 	
-	private static String Get_menu() {
+	private static String getMenu() {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("\nLibrary Main Menu\n\n")
-		  .append("  M  : add member\n")
-		  .append("  LM : list members\n")
+		  .append("  M  : add Member\n")
+		  .append("  LM : list Members\n")
 		  .append("\n")
-		  .append("  B  : add book\n")
-		  .append("  LB : list books\n")
-		  .append("  FB : fix books\n")
+		  .append("  B  : add Book\n")
+		  .append("  LB : list Books\n")
+		  .append("  FB : fix Books\n")
 		  .append("\n")
 		  .append("  L  : take out a loan\n")
 		  .append("  R  : return a loan\n")
@@ -67,7 +68,7 @@ public class Main {
 				output(b);
 			}
 						
-			MENU = Get_menu();
+			MENU = getMenu();
 			
 			boolean e = false;
 			
@@ -87,7 +88,7 @@ public class Main {
 					break;
 					
 				case "B": 
-					ADD_BOOK();
+					addBook();
 					break;
 					
 				case "LB": 
@@ -95,15 +96,15 @@ public class Main {
 					break;
 					
 				case "FB": 
-					FIX_BOOKS();
+					fixBook();
 					break;
 					
 				case "L": 
-					BORROW_BOOK();
+					borrowBook();
 					break;
 					
 				case "R": 
-					RETURN_BOOK();
+					returnBook();
 					break;
 					
 				case "LL": 
@@ -111,11 +112,11 @@ public class Main {
 					break;
 					
 				case "P": 
-					PAY_FINES();
+					payFines();
 					break;
 					
 				case "T": 
-					INCREMENT_DATE();
+					incrementDate();
 					break;
 					
 				case "Q": 
@@ -136,7 +137,7 @@ public class Main {
 	}	
 
 	
-	private static void PAY_FINES() {
+	private static void payFines() {
 		new PayFineUI(new PayFineControl()).run();		
 	}
 
@@ -168,22 +169,22 @@ public class Main {
 
 
 
-	private static void BORROW_BOOK() {
+	private static void borrowBook() {
 		new BorrowBookUI(new BorrowBookControl()).run();		
 	}
 
 
-	private static void RETURN_BOOK() {
-		new ReturnBookUI(new rETURN_bOOK_cONTROL()).RuN();		
+	private static void returnBook() {
+		new ReturnBookUI(new ReturnBookControl()).run();		
 	}
 
 
-	private static void FIX_BOOKS() {
+	private static void fixBook() {
 		new FixBookUI(new FixBookControl()).run();		
 	}
 
 
-	private static void INCREMENT_DATE() {
+	private static void incrementDate() {
 		try {
 			int days = Integer.valueOf(input("Enter number of days: ")).intValue();
 			CAL.incrementDate(days);
@@ -196,25 +197,25 @@ public class Main {
 	}
 
 
-	private static void ADD_BOOK() {
+	private static void addBook() {
 		
-		String AuThOr = input("Enter author: ");
-		String TiTlE  = input("Enter title: ");
-		String CaLl_NuMbEr = input("Enter call number: ");
-		Book BoOk = LIB.addBook(AuThOr, TiTlE, CaLl_NuMbEr);
-		output("\n" + BoOk + "\n");
+		String author = input("Enter Author: ");
+		String title  = input("Enter Title: ");
+		String callNumber = input("Enter call number: ");
+		Book book = LIB.addBook(author, title, callNumber);
+		output("\n" + book + "\n");
 		
 	}
 
 	
 	private static void addMember() {
 		try {
-			String LaSt_NaMe = input("Enter last name: ");
-			String FiRsT_NaMe  = input("Enter first name: ");
-			String EmAiL_AdDrEsS = input("Enter email address: ");
-			int PhOnE_NuMbEr = Integer.valueOf(input("Enter phone number: ")).intValue();
-			Member MeMbEr = LIB.addMember(LaSt_NaMe, FiRsT_NaMe, EmAiL_AdDrEsS, PhOnE_NuMbEr);
-			output("\n" + MeMbEr + "\n");
+			String lastname = input("Enter last name: ");
+			String firstName  = input("Enter first name: ");
+			String emailAddress = input("Enter email address: ");
+			int phoneNumber = Integer.valueOf(input("Enter phone number: ")).intValue();
+			Member member = LIB.addMember(lastname, firstName, emailAddress, phoneNumber);
+			output("\n" + member + "\n");
 			
 		} catch (NumberFormatException e) {
 			 output("\nInvalid phone number\n");
