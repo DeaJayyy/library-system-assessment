@@ -55,7 +55,7 @@ public class Main {
     public static void main(String[] args) {        
         try {            
             IN = new Scanner(System.in);
-            LIB = Library.GeTiNsTaNcE();
+            LIB = Library.getInstance();
             CAL = Calendar.getInstance();
             SDF = new SimpleDateFormat("dd/MM/yyyy");
     
@@ -137,7 +137,7 @@ public class Main {
 
     
     private static void PAY_FINES() {
-        new PayFineUI(new PayFineControl()).RuN();        
+        new PayFineUI(new PayFineControl()).run();        
     }
 
 
@@ -179,7 +179,7 @@ public class Main {
 
 
     private static void FIX_BOOKS() {
-        new FixBookUI(new FixBookControl()).RuN();        
+        new FixBookUI(new FixBookControl()).run();        
     }
 
 

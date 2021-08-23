@@ -22,7 +22,7 @@ public class bORROW_bOOK_cONTROL {
 	
 	
 	public bORROW_bOOK_cONTROL() {
-		this.lIbRaRy = Library.GeTiNsTaNcE();
+		this.lIbRaRy = Library.getInstance();
 		sTaTe = CONTROL_STATE.INITIALISED;
 	}
 	
@@ -41,7 +41,7 @@ public class bORROW_bOOK_cONTROL {
 		if (!sTaTe.equals(CONTROL_STATE.READY)) 
 			throw new RuntimeException("BorrowBookControl: cannot call cardSwiped except in READY state");
 			
-		mEmBeR = lIbRaRy.gEt_MeMbEr(mEmBeR_Id);
+		mEmBeR = lIbRaRy.getMember(mEmBeR_Id);
 		if (mEmBeR == null) {
 			uI.DiSpLaY("Invalid memberId");
 			return;
@@ -63,7 +63,7 @@ public class bORROW_bOOK_cONTROL {
 		if (!sTaTe.equals(CONTROL_STATE.SCANNING)) 
 			throw new RuntimeException("BorrowBookControl: cannot call bookScanned except in SCANNING state");
 			
-		bOoK = lIbRaRy.gEt_BoOk(bOoKiD);
+		bOoK = lIbRaRy.getBook(bOoKiD);
 		if (bOoK == null) {
 			uI.DiSpLaY("Invalid bookId");
 			return;
