@@ -32,13 +32,13 @@ public class fix_book_control {
 		if (!StAtE.equals(CoNtRoL_StAtE.READY)) 
 			throw new RuntimeException("FixBookControl: cannot call bookScanned except in READY state");
 			
-		CuRrEnT_BoOk = LiBrArY.GET_BOOK(BoOkId);
+		CuRrEnT_BoOk = LiBrArY.getBook(BoOkId);
 		
 		if (CuRrEnT_BoOk == null) {
 			Ui.dIsPlAy("Invalid bookId");
 			return;
 		}
-		if (!CuRrEnT_BoOk.IS_DAMAGED()) {
+		if (!CuRrEnT_BoOk.isDamaged()) {
 			Ui.dIsPlAy("Book has not been damaged");
 			return;
 		}

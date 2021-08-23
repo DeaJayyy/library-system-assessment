@@ -46,7 +46,7 @@ public class Member implements Serializable {
 	}
 
 	
-	public int GET_ID() {
+	public int getId() {
 		return MeMbEr_Id;
 	}
 
@@ -67,8 +67,8 @@ public class Member implements Serializable {
 
 	
 	public void TaKe_OuT_LoAn(Loan lOaN) {
-		if (!cUrReNt_lOaNs.containsKey(lOaN.GET_ID())) 
-			cUrReNt_lOaNs.put(lOaN.GET_ID(), lOaN);
+		if (!cUrReNt_lOaNs.containsKey(lOaN.getId())) 
+			cUrReNt_lOaNs.put(lOaN.getId(), lOaN);
 		
 		else 
 			throw new RuntimeException("Duplicate loan added to member");
@@ -107,8 +107,8 @@ public class Member implements Serializable {
 
 
 	public void dIsChArGeLoAn(Loan LoAn) {
-		if (cUrReNt_lOaNs.containsKey(LoAn.GET_ID())) 
-			cUrReNt_lOaNs.remove(LoAn.GET_ID());
+		if (cUrReNt_lOaNs.containsKey(LoAn.getId())) 
+			cUrReNt_lOaNs.remove(LoAn.getId());
 		
 		else 
 			throw new RuntimeException("No such loan held by member");

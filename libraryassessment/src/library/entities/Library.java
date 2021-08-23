@@ -126,7 +126,7 @@ public class Library implements Serializable {
 
 	public Member add_member(String lastName, String firstName, String email, int phoneNo) {		
 		Member member = new Member(lastName, firstName, email, phoneNo, gEt_NeXt_MeMbEr_Id());
-		MeMbErS.put(member.GET_ID(), member);		
+		MeMbErS.put(member.getId(), member);		
 		return member;
 	}
 
@@ -145,7 +145,7 @@ public class Library implements Serializable {
 	}
 
 	
-	public Book GET_BOOK(int bookId) {
+	public Book getBook(int bookId) {
 		if (CaTaLoG.containsKey(bookId)) 
 			return CaTaLoG.get(bookId);		
 		return null;
@@ -157,7 +157,7 @@ public class Library implements Serializable {
 	}
 
 	
-	public boolean cAn_MeMbEr_BoRrOw(Member member) {		
+	public boolean canMemeberBorrow(Member member) {		
 		if (member.gEt_nUmBeR_Of_CuRrEnT_LoAnS() == lOaNlImIt ) 
 			return false;
 				
@@ -165,7 +165,7 @@ public class Library implements Serializable {
 			return false;
 				
 		for (Loan loan : member.GeT_LoAnS()) 
-			if (loan.IS_OVER_DUE()) 
+			if (loan.isOverDue()) 
 				return false;
 			
 		return true;
@@ -181,8 +181,8 @@ public class Library implements Serializable {
 		Date dueDate = Calendar.getInstance().gEt_DuE_DaTe(loanPeriod);
 		Loan loan = new Loan(gEt_NeXt_LoAn_Id(), book, member, dueDate);
 		member.TaKe_OuT_LoAn(loan);
-		book.BORROW();
-		LoAnS.put(loan.GET_ID(), loan);
+		book.borrow();
+		LoAnS.put(loan.getId(), loan);
 		CuRrEnT_LoAnS.put(book.getId(), loan);
 		return loan;
 	}
@@ -197,8 +197,8 @@ public class Library implements Serializable {
 
 	
 	public double CALCULATE_OVER_DUE_FINE(Loan LoAn) {
-		if (LoAn.IS_OVER_DUE()) {
-			long DaYs_OvEr_DuE = Calendar.getInstance().GeT_DaYs_DiFfErEnCe(LoAn.GET_DUE_DATE());
+		if (LoAn.isOverDue()) {
+			long DaYs_OvEr_DuE = Calendar.getInstance().GeT_DaYs_DiFfErEnCe(LoAn.getDueDate());
 			double fInE = DaYs_OvEr_DuE * FiNe_PeR_DaY;
 			return fInE;
 		}
@@ -207,33 +207,33 @@ public class Library implements Serializable {
 
 
 	public void discharge_loan(Loan cUrReNt_LoAn, boolean iS_dAmAgEd) {
-		Member mEmBeR = cUrReNt_LoAn.GET_MEMBER();
-		Book bOoK  = cUrReNt_LoAn.GET_BOOK();
+		Member mEmBeR = cUrReNt_LoAn.getMember();
+		Book bOoK  = cUrReNt_LoAn.getBook();
 		
 		double oVeR_DuE_FiNe = CALCULATE_OVER_DUE_FINE(cUrReNt_LoAn);
 		mEmBeR.AdD_FiNe(oVeR_DuE_FiNe);	
 		
 		mEmBeR.dIsChArGeLoAn(cUrReNt_LoAn);
-		bOoK.RETURN(iS_dAmAgEd);
+		bOoK.returnBook(iS_dAmAgEd);
 		if (iS_dAmAgEd) {
 			mEmBeR.AdD_FiNe(damageFee);
 			DaMaGeD_BoOkS.put(bOoK.getId(), bOoK);
 		}
-		cUrReNt_LoAn.DISCHARGE();
+		cUrReNt_LoAn.discharge();
 		CuRrEnT_LoAnS.remove(bOoK.getId());
 	}
 
 
 	public void CHECK_CURRENT_LOANS() {
 		for (Loan lOaN : CuRrEnT_LoAnS.values()) 
-			lOaN.CHECK_OVER_DUE();
+			lOaN.checkOverDue();
 				
 	}
 
 
 	public void RePaIr_BoOk(Book cUrReNt_BoOk) {
 		if (DaMaGeD_BoOkS.containsKey(cUrReNt_BoOk.getId())) {
-			cUrReNt_BoOk.REPAIR();
+			cUrReNt_BoOk.repair();
 			DaMaGeD_BoOkS.remove(cUrReNt_BoOk.getId());
 		}
 		else 

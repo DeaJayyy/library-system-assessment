@@ -46,7 +46,7 @@ public class borrow_book_control {
 			uI.DiSpLaY("Invalid memberId");
 			return;
 		}
-		if (lIbRaRy.cAn_MeMbEr_BoRrOw(mEmBeR)) {
+		if (lIbRaRy.canMemeberBorrow(mEmBeR)) {
 			pEnDiNg_LiSt = new ArrayList<>();
 			uI.SeT_StAtE(BorrowBookUI.uI_STaTe.SCANNING);
 			sTaTe = CONTROL_STATE.SCANNING; 
@@ -63,12 +63,12 @@ public class borrow_book_control {
 		if (!sTaTe.equals(CONTROL_STATE.SCANNING)) 
 			throw new RuntimeException("BorrowBookControl: cannot call bookScanned except in SCANNING state");
 			
-		bOoK = lIbRaRy.GET_BOOK(bOoKiD);
+		bOoK = lIbRaRy.getBook(bOoKiD);
 		if (bOoK == null) {
 			uI.DiSpLaY("Invalid bookId");
 			return;
 		}
-		if (!bOoK.IS_AVAILABIE()) {
+		if (!bOoK.isAvailable()) {
 			uI.DiSpLaY("Book cannot be borrowed");
 			return;
 		}
